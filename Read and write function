@@ -1,0 +1,96 @@
+Read and write functions are used to read from a file and write to a file.
+Syntax:
+
+file-stream-class stream_object;
+stream_object.read((char *)&V,sizeof(V));    //reading from file
+stream_object.write((char *)&V,sizeof(V));   //writing to the file 
+for example: 
+fstream finout;
+finout.write((char *)&a,sizeof(a));
+
+Question: WAP in C++ to read name,rollno and marks of 'n' number of students to the file and read from the file and output the student information with highest marks.
+
+//solutuion or code:
+
+#include<iostream.h>
+#include<conio.h>
+#include<fstream.h>
+
+class student{
+char name[20];
+  int rollno;
+  float mark;
+  public:
+
+  void getdata(){
+    cout<<"Name : ";
+    cin>>name;
+    cout<<"Rollno : ";
+    cin>>rollno;
+    cout<<"Marks : ";
+    cin>>mark;
+}
+  void display()
+  {
+    cout<<"Name : ";
+    cin>>name;
+    cout<<"Rollno : ";
+    cin>>rollno;
+    cout<<"Marks : ";
+    cin>>mark;
+   }
+
+  //function to access the private datamember from class
+
+  void getmark()
+  {
+    return(mark);
+    }
+
+  //main
+
+  void mnain()
+  {
+    int n;
+    student a[20],b;                                                  //Here object b is created to store the imformation of student with highest marks
+    fstream finout;
+    finout.open("Student.txt",ios::in|ios::out);
+    cout<<"Enter the number of students: ";
+    cin>>n;
+    for(int i=0;i<n;i++)
+      {
+      a[i].getdata();                                                    //we use class type object to get data from the user
+      finout.write((char *)&a[i],sizeof(a[i]));                            //after that we use write() function to write that data in file
+      }
+     finout.seekg(0,ios::beg);
+
+    //seekg is an input function that moves get() function to the desired specific location
+    
+    //now for finding highest mark we can simply compare with a variable with 0 value assigned
+
+    float highest=0;
+    for(int j=0;j<n;j++)
+      {
+      finout.read((char *)&a,sizeof(a[i])):
+      while(highest<a[i].getmark())
+        {
+          highest=a[i].getmark();
+          b=a[i];
+        }
+      }
+    cout<<"The topper of the class is: ";
+    b.display();
+    finout.close();
+    getch();
+    }
+    
+
+
+
+
+
+
+
+
+
+
